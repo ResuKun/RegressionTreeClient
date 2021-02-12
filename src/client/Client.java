@@ -92,24 +92,37 @@ public class Client {
 				/*printRules*/
 				answer = communicator.getMessage();
 				System.out.println(answer+"\n");
+				boolean valid=false;
 				do {
 					/*prediction phase*/
 					System.out.println("Starting prediction phase! \n");
 					answer = communicator.getMessage();
-					while (answer.equals("QUERY")) {
-						// Formualting query, reading answer
-						answer = communicator.getMessage();
-						System.out.println(answer);
-						int path = Keyboard.readInt();
-						communicator.sendIntegerValue(path);
-						answer = communicator.getMessage();
+					while (!answer.equals("OK")) {
+						if(answer.equals("QUERY")) {
+							// Formualting query, reading answer
+							answer = communicator.getMessage();
+							System.out.println(answer);
+							int path = 0;
+							valid=false;
+							while(!valid) {
+								path = Keyboard.readInt();
+								if(path != Integer.MIN_VALUE)
+									valid=true;
+								else 
+									System.out.println(answer);
+							}
+							communicator.sendIntegerValue(path);
+							answer = communicator.getMessage();
+						}else {
+							System.out.println(answer);
+							answer = communicator.getMessage();
+						}
+						
 					}
 	
-					if (answer.equals("OK")) { // Reading prediction
-						Double value = (Double) communicator.getDoubleValue();
-						System.out.println("Predicted class:" + value);
-					} else // Printing error message
-						System.out.println(answer);
+					Double value = (Double) communicator.getDoubleValue();
+					System.out.println("Predicted class:" + value);
+						
 	
 					System.out.println("Would you repeat ? (y/n)");
 					risp = Keyboard.readChar();
