@@ -37,7 +37,7 @@ public class Client {
 			System.out.println("Load Regression Tree from archive [3]");
 			System.out.println("Close connection [4]");
 			decision = Keyboard.readInt();
-		} while (decision < 0 && decision > 4);
+		} while (decision < 0 || decision > 4);
 
 		String tableName = "";
 		try {
