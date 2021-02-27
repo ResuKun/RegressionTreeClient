@@ -117,23 +117,20 @@ public class Client {
 							System.out.println(answer);
 							answer = communicator.getMessage();
 						}
-						
 					}
-	
 					Double value = (Double) communicator.getDoubleValue();
 					System.out.println("Predicted class:" + value);
-						
-	
 					System.out.println("Would you repeat ? (y/n)");
 					risp = Keyboard.readChar();
 					communicator.sendCharValue(risp);
 				} while (Character.toUpperCase(risp) == 'Y');
-				
 			}
 		}catch (IOException e) {
 			System.out.println(e.getMessage());
+			Keyboard.promptEnterKey();
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
+			Keyboard.promptEnterKey();
 		}finally {
 			try {
 				communicator.closeConnectionStreams();
@@ -142,4 +139,5 @@ public class Client {
 			}
 		}
 	}
+
 }

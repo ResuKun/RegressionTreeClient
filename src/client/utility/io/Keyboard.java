@@ -263,4 +263,14 @@ public class Keyboard {
 		}
 		return value;
 	}
+	
+	  
+	public static void promptEnterKey(){
+      System.out.println("Press \"ENTER\" to close...");
+      try {
+          System.in.read(new byte[2]);
+      } catch (IOException e) {
+      	System.out.println(e.getMessage());
+      }
+  }
 }
